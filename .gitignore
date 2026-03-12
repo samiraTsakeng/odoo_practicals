@@ -1,6 +1,8 @@
 # sphinx build directories
 _build/
 
+#ignore default odoo addons
+odoo/addons
 # dotfiles
 .*
 !.gitignore
