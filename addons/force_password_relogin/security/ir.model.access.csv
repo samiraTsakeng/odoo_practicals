@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_force_password_relogin_force_password_relogin,force_password_relogin.force_password_relogin,model_force_password_relogin_force_password_relogin,,1,0,0,0

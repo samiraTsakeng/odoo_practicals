@@ -1,0 +1,76 @@
+<odoo>
+
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="customer_feedback_list">
+      <field name="name">feedback list</field>
+      <field name="model">customer.feedback</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="rating"/>
+          <field name="comment"/>
+          <!--<field name="order_id"/>
+          <field name="customer_id"/>-->
+        </tree>
+      </field>
+    </record>
+
+    <!-- form view -->
+    <record model="ir.ui.view" id="view_feedback_form_inherit_customer_fedback">
+      <field name="name">Feedback form</field>
+      <field name="model">customer.feedback</field>
+      <field name="inherit_id" ref="sale.view_feedback_form"/>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="rating"/>
+            <field name="comment"/>
+            <field name="name"/>
+            <!--<field name="order_id"/>
+            <field name="customer_id"/>-->
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="customer_feedback_feedback_action_window">
+      <field name="name">feedback window</field>
+      <field name="res_model">customer.feedback</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="customer_feedback.action_server">
+      <field name="name">customer_feedback server</field>
+      <field name="model_id" ref="model_customer_feedback_customer_feedback"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+
+    <menuitem name="customer_feedback" id="menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Feedback" id="feedback_cat" parent="menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="customer Feedback" id="feedback_list_menu" parent="feedback_cat"
+              action="customer_feedback_feedback_action_window"/>
+
+
+</odoo>

@@ -1,0 +1,35 @@
+<odoo>
+
+  <record id="view_order_form_inherit_trial" model="ir.ui.view">
+    <field name="name">sale.order.form.trial</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//sheet/group" position="inside">
+        <group>
+          <field name="trial_field"/>
+        </group>
+      </xpath>
+
+      <xpath expr="//sheet/group" positon="after">
+        <group>
+          <field name="order_channel"/>
+        </group>
+      </xpath>
+
+      <xpath expr="//sheet/group" position="after">
+        <group>
+          <field name="internal_note"/>
+        </group>
+      </xpath>
+
+      <xpath expr="//field[@name='order_channel']" position="after">
+        <group>
+          <field name="priority_level"/>
+        </group>
+      </xpath>
+    </field>
+
+  </record>
+</odoo>

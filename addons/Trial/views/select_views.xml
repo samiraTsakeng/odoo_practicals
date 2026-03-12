@@ -1,0 +1,69 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="trial_select_list_view">
+      <field name="name">trial selection</field>
+      <field name="model">trial.select</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="trial_select_form_view">
+      <field name="name">Selection form</field>
+      <field name="model">trial.select</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+          <field name="name"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="trial_select_action_window">
+      <field name="name">select window</field>
+      <field name="res_model">trial.select</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="trial.action_server">
+      <field name="name">trial server</field>
+      <field name="model_id" ref="model_trial_trial"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+
+    <menuitem name="trial" id="menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Select" id="select_cat" parent="menu_root"/>
+    <!--<menuitem name="Menu 2" id="trial.menu_2" parent="trial.menu_root"/>
+    -->
+    <!-- actions -->
+
+    <menuitem name="selection trial" id="select_try_menu" parent="select_cat"
+              action="trial_select_action_window"/>
+
+
+  </data>
+</odoo>
