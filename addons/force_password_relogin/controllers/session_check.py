@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-from odoo import http
+from odoo import models, api
 from odoo.http import request
+from odoo.exceptions import AccessDenied
 
-class SessionCheck(http.Controller):
+class SecureSessionMixin(models.AbstractModel):
+    _name = 'secure.session.mixin'
 
-     @http.route('/check/session', type='http', auth='public')
-     def check_session(self, **kw):
-
+    @api.model
+    def check_session_validity(self):
+        """Check if user needs to re-login after password change"""
         user = request.env.user
+        if user.id == 1:  # ne jamais bloquer l’admin
+            return
 
         if user.password_change_date:
-
-            session_login = request.session.get('login_time')
-            if session_login and session_login < user.password_change_date.timestamp():
-                request.session.logout()
-                return http.redirect_with_hash('/web/login')
-
-        return "okaaay"
+            login_time = request.session.get('login_time')
+            if login_time and login_time < user.password_change_date.timestamp():
+                raise AccessDenied("You need to login first")
